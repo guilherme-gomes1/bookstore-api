@@ -9,6 +9,8 @@ import com.guilherme.bookstore.domain.Categoria;
 import com.guilherme.bookstore.repositories.CategoriaRepository;
 import com.guilherme.bookstore.service.exceptions.ObjectNotFoundException;
 
+import java.util.List;
+
 @Service
 public class CategoriaService {
 
@@ -18,5 +20,9 @@ public class CategoriaService {
 	public Categoria findById(Integer id) {
 		Optional<Categoria> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
+	}
+	
+	public List<Categoria> findAll() {
+		return repository.findAll();
 	}
 }
