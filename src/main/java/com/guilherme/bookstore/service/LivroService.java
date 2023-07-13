@@ -17,6 +17,9 @@ public class LivroService {
 
 	@Autowired
 	private LivroRepository repository;
+	
+	@Autowired
+	private CategoriaService categoriaService;
 
 	public Livro findById(Integer id) {
 		Optional<Livro> obj = repository.findById(id);
@@ -28,11 +31,14 @@ public class LivroService {
 		return repository.findAll();
 	}
 	
+	public List<Livro> findAllByCategory(Integer id_cat) {
+		categoriaService.findById(id_cat);
+		return repository.findAllByCategory(id_cat);
+	}
+	
 	public Livro update(Integer id, LivroDTO objDto) {
 		Livro obj = findById(id);
 		obj.setTitulo(objDto.getTitulo());
-		obj.setNome_autor(objDto.getNome_autor());
-		obj.setTexto(objDto.getTexto());
 		return repository.save(obj);
 	}
 	
