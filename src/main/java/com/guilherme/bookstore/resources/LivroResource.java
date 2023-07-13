@@ -50,8 +50,8 @@ public class LivroResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Livro> create(@RequestBody Livro obj) {
-		obj = service.create(obj);
+	public ResponseEntity<Livro> create(@RequestParam(value = "categoria", defaultValue = "0") Integer id_cat, @RequestBody Livro obj) {
+		obj = service.create(id_cat, obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
